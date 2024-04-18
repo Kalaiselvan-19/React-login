@@ -44,7 +44,8 @@ const Register = () => {
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleRegister}>
-        <h2>Register</h2>
+        <h2>Sign up to Vendy</h2>
+        <p>Your digital biz BFF! Sell, manage, thrive!</p>
         <div className="form-group">
           <p>Email</p>
           <CustomTextField

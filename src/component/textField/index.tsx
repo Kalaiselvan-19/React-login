@@ -22,7 +22,6 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
       name={name}
       onChange={onChange}
       required={required}
-      placeholder={name}
     />
   );
 };
