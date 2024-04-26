@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import EyeOpenIcon from "../../assets/icons/EyeOpenIcon.svg";
 import EyeCloseIcon from "../../assets/icons/EyeCloseIcon.svg";
 import { useNavigate } from "react-router-dom";
 import CustomTextField from "../../component/textField";
 
+type RegisterProps = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  showPassword: boolean;
+  showConfirmPassword: boolean;
+};
+
 const Register = () => {
-  const [register, setRegister] = useState({
+  const [register, setRegister] = useState<RegisterProps>({
     email: "",
     password: "",
     confirmPassword: "",
@@ -30,16 +38,16 @@ const Register = () => {
     navigate("/");
   };
 
-  const togglePasswordVisibility = () => {
+  const togglePasswordVisibility = useCallback(() => {
     setRegister({ ...register, showPassword: !register.showPassword });
-  };
+  }, [register]);
 
-  const toggleConfirmPasswordVisibility = () => {
+  const toggleConfirmPasswordVisibility = useCallback(() => {
     setRegister({
       ...register,
       showConfirmPassword: !register.showConfirmPassword,
     });
-  };
+  }, [register]);
 
   return (
     <div className="login-container">

@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import "./Login.css";
 import EyeOpenIcon from "../../assets/icons/EyeOpenIcon.svg";
 import EyeCloseIcon from "../../assets/icons/EyeCloseIcon.svg";
 import { useNavigate } from "react-router-dom";
 import CustomTextField from "../../component/textField";
 
+type LoginProps = {
+  email: string;
+  password: string;
+  showPassword: boolean;
+};
+
 const Login: React.FC = () => {
-  const [login, setLogin] = useState({ email: "", password: "" });
-  // const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [login, setLogin] = useState<LoginProps>({
+    email: "",
+    password: "",
+    showPassword: false,
+  });
+
   const navigate = useNavigate();
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -22,9 +31,9 @@ const Login: React.FC = () => {
     navigate("/home");
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const togglePasswordVisibility = useCallback(() => {
+    setLogin({ ...login, showPassword: !login.showPassword });
+  }, [login]);
 
   return (
     <div className="login-container">
@@ -44,7 +53,7 @@ const Login: React.FC = () => {
         <div className="form-group password-input">
           <p>Password</p>
           <CustomTextField
-            type={showPassword ? "text" : "password"}
+            type={login.showPassword ? "text" : "password"}
             name="password"
             value={login.password}
             onChange={handleChange}
@@ -53,8 +62,8 @@ const Login: React.FC = () => {
 
           <div className="eye-icon" onClick={togglePasswordVisibility}>
             <img
-              src={showPassword ? EyeOpenIcon : EyeCloseIcon}
-              alt={showPassword ? "Hide Password" : "Show Password"}
+              src={login.showPassword ? EyeOpenIcon : EyeCloseIcon}
+              alt={login.showPassword ? "Hide Password" : "Show Password"}
             />
           </div>
         </div>
