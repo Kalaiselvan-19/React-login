@@ -28,7 +28,7 @@ const Login: React.FC = () => {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("login:", login);
-    navigate("/home");
+    navigate("/viewall");
   };
 
   const togglePasswordVisibility = useCallback(() => {
