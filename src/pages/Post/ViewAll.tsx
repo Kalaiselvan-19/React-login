@@ -19,9 +19,7 @@ const MyComponent = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get<Post[]>(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
+      const response = await axios.get<Post[]>("http://localhost:4000/posts");
       setPosts(response.data);
     } catch (error) {
       console.error("Error in fetching data:", error);
@@ -29,11 +27,9 @@ const MyComponent = () => {
   };
   const handleDelete = async (postId: number) => {
     try {
-      await axios.delete(
-        `https://jsonplaceholder.typicode.com/posts/${postId}`
-      );
+      await axios.delete(`http://localhost:4000/posts/${postId}`);
       alert("Post deleted successfully!");
-      setPosts((data) => data.filter((post) => post.id !== postId));
+      // setPosts((data) => data.filter((post) => post.id !== postId));
     } catch (error) {
       console.error("Error deleting post:", error);
     }

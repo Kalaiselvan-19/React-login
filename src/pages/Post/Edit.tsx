@@ -1,13 +1,13 @@
-// EditPost.tsx
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Post.css";
+
 interface EditPost {
   title: string;
   body: string;
 }
+
 const EditPost: React.FC = () => {
   const { id = "" } = useParams<{ id?: string }>();
   const postId = parseInt(id);
@@ -25,9 +25,7 @@ const EditPost: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `https://jsonplaceholder.typicode.com/posts/${postId}`
-      );
+      const response = await axios.get(`http://localhost:4000/posts/${postId}`);
       const postData = response.data;
       setEditPost(postData);
     } catch (error) {
@@ -37,14 +35,20 @@ const EditPost: React.FC = () => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
-        editPost,
-      });
+      await axios.put(`http://localhost:4000/posts/${postId}`, editPost);
       alert("Post updated successfully!");
       navigate("/viewall");
     } catch (error) {
       console.error("Error updating post:", error);
     }
+  };
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditPost({ ...editPost, title: e.target.value });
+  };
+
+  const handleBodyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setEditPost({ ...editPost, body: e.target.value });
   };
 
   return (
@@ -55,14 +59,14 @@ const EditPost: React.FC = () => {
         <input
           type="text"
           value={editPost.title}
-          onChange={(e) => EditPost(e.target.value)}
+          onChange={handleTitleChange}
         />
       </div>
       <div className="input-edit-container">
         <label>Body:</label>
         <textarea
           value={editPost.body}
-          onChange={(e) => EditPost(e.target.value)}
+          onChange={handleBodyChange}
           className="textarea"
         />
       </div>

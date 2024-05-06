@@ -1,0 +1,22 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "userId": 1,
+      "title": "post1",
+      "body": "body1"
+    },
+    {
+      "id": "2",
+      "userId": 2,
+      "title": "postEdited",
+      "body": "bodyEdited"
+    },
+    {
+      "id": "3",
+      "userId": 3,
+      "title": "post3",
+      "body": "body3"
+    }
+  ]
+}

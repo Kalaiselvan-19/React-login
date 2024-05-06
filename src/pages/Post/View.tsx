@@ -28,7 +28,7 @@ const ViewPost: React.FC = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get<Post>(
-        `https://jsonplaceholder.typicode.com/posts/${postId}`
+        `http://localhost:4000/posts/${postId}`
       );
       const postData = response.data;
       setViewPost(postData); // Set the viewPost state
